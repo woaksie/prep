@@ -5,21 +5,6 @@ using prep.utility.filtering;
 
 namespace prep.collections
 {
-    public  class MatchMovie:IMatchAn<Movie>
-    {
-        private readonly MovieCriteria _criteria;
-
-        public MatchMovie(MovieCriteria criteria)
-        {
-            _criteria = criteria;
-        }
-
-        public bool matches(Movie item)
-        {
-            return _criteria(item);
-        }
-    }
-
   public class MovieLibrary
   {
     IList<Movie> movies;
@@ -46,9 +31,9 @@ namespace prep.collections
       return movies.Contains(movie);
     }
 
-    IEnumerable<Movie> get_movies_matching(MovieCriteria movie_matcher)
+    IEnumerable<Movie> get_movies_matching(Condition<Movie> movie_matcher)
     {
-      return movies.all_items_matching(new MatchMovie( movie_matcher.Invoke));
+      return movies.all_items_matching(new ConditionalMatch<Movie>(movie_matcher));
     }
 
     public IEnumerable<Movie> all_movies_published_by_pixar()
