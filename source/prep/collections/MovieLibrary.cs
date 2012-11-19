@@ -1,9 +1,25 @@
 using System;
 using System.Collections.Generic;
 using prep.utility;
+using prep.utility.filtering;
 
 namespace prep.collections
 {
+    public  class MatchMovie:IMatchAn<Movie>
+    {
+        private readonly MovieCriteria _criteria;
+
+        public MatchMovie(MovieCriteria criteria)
+        {
+            _criteria = criteria;
+        }
+
+        public bool matches(Movie item)
+        {
+            return _criteria(item);
+        }
+    }
+
   public class MovieLibrary
   {
     IList<Movie> movies;
@@ -32,7 +48,7 @@ namespace prep.collections
 
     IEnumerable<Movie> get_movies_matching(MovieCriteria movie_matcher)
     {
-      return movies.all_items_matching(movie_matcher.Invoke);
+      return movies.all_items_matching(new MatchMovie( movie_matcher.Invoke));
     }
 
     public IEnumerable<Movie> all_movies_published_by_pixar()
