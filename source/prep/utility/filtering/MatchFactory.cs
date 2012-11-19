@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace prep.utility.filtering
 {
@@ -18,7 +19,15 @@ namespace prep.utility.filtering
 
     public IMatchAn<ItemToFilter> equal_to_any(params TProperty[] values)
     {
-      throw new NotImplementedException();
+        return new ConditionalMatch<ItemToFilter>(item =>
+            {
+                foreach (var value in values)
+                {
+                    if (accessor(item).Equals(value))
+                        return true;
+                }
+                return false;
+            });
     }
   }
 }
