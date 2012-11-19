@@ -73,6 +73,7 @@
     <Compile Include="utility\filtering\MatchExtensions.cs" />
     <Compile Include="utility\filtering\ConditionalMatch.cs" />
     <Compile Include="utility\filtering\OrMatch.cs" />
+    <Compile Include="utility\filtering\PropertyAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
