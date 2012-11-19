@@ -74,7 +74,7 @@
     <Compile Include="utility\filtering\ConditionalMatch.cs" />
     <Compile Include="utility\filtering\OrMatch.cs" />
     <Compile Include="utility\filtering\PropertyAccessor.cs" />
-    <Compile Include="utility\filtering\PropertyIsEqualTo.cs" />
+    <Compile Include="utility\filtering\MatchFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
