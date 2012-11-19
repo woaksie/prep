@@ -35,49 +35,46 @@ namespace prep.collections
 			throw new NotImplementedException();
 		}
 
-
-		IEnumerable<Movie> get_movies_matching(Predicate<Movie> movie_matcher)
+	  IEnumerable<Movie> get_movies_matching(MovieCriteria movie_matcher)
 		{
-			foreach (var movie in movies)
-			{
-				if (movie_matcher(movie))
-				{
-					yield return movie;
-				}
-			}
+      return movies.all_items_matching()
 		}
 		public IEnumerable<Movie> all_movies_published_by_pixar()
 		{
-			return get_movies_matching(movie => movie.production_studio == ProductionStudio.Pixar);
+		  return get_movies_matching(x => x.production_studio == ProductionStudio.Pixar);
 		}
 
-		public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
+	  bool is_published_by_pixar(Movie movie)
+	  {
+	  }
+
+	  public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
 		{
 			return get_movies_matching(movie => movie.production_studio == ProductionStudio.Pixar || movie.production_studio == ProductionStudio.Disney);
 		}
 
-		public IEnumerable<Movie> sort_all_movies_by_title_ascending()
+	  public IEnumerable<Movie> all_movies_not_published_by_pixar()
+	  {
+	    foreach (var movie in movies)
+	    {
+	      if (movie.production_studio != ProductionStudio.Pixar)
+	      {
+	        yield return movie;
+	      }
+	    }
+	  }
+
+	  public IEnumerable<Movie> sort_all_movies_by_title_ascending()
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
+	  public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
 		{
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<Movie> all_movies_not_published_by_pixar()
-		{
-			foreach (var movie in movies)
-			{
-				if (movie.production_studio != ProductionStudio.Pixar)
-				{
-					yield return movie;
-				}
-			}
-		}
-
-		public IEnumerable<Movie> all_movies_published_after(int year)
+	  public IEnumerable<Movie> all_movies_published_after(int year)
 		{
 			foreach (var movie in movies)
 			{
