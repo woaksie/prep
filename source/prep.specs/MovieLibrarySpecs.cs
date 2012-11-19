@@ -70,6 +70,21 @@ namespace prep.specs
         depends.on(movie_collection);
       };
     };
+    public class when_iterating : movie_library_concern
+    {
+      static IEnumerable<Movie> result;
+
+      Establish c = () =>
+        movie_collection.add_all(new Movie(), new Movie());
+
+      Because b = () =>
+        result = sut.all_movies();
+
+      It should_return_the_number_of_all_movies_in_the_library = () =>
+      {
+        result.Count();
+      };
+    }
 
     public class when_counting_the_number_of_movies : movie_library_concern
     {
