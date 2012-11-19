@@ -157,6 +157,7 @@ namespace prep.specs
       Because b = () =>
         sut.add(movie);
 
+
       It should_not_restore_the_movie_in_the_collection = () =>
         movie_collection.Count.ShouldEqual(1);
     }
